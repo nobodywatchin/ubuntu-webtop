@@ -3,7 +3,7 @@
 # very W.I.P, may break any time PLEASE do not use this in production.
 ## WebTop Plus
 
-![img](https://i.ibb.co/Np6L1KK/Untitled.png)
+![img](https://raw.githubusercontent.com/Mollomm1/docker-webtop-plus/master/.github/demo.png)
 
 
 Original WebTop: [linuxserver/webtop](https://github.com/linuxserver/docker-webtop)
