@@ -1,43 +1,58 @@
-FROM ghcr.io/linuxserver/baseimage-kasmvnc:alpine319
+FROM ghcr.io/linuxserver/baseimage-kasmvnc:ubuntujammy
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
-ARG XFCE_VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thelamer"
+LABEL maintainer="mollomm1"
 
-# title
-ENV TITLE="Alpine XFCE"
+ENV TITLE="Ubuntu 22.04 Gnome"
+
+COPY /root/etc/apt/preferences.d/firefox-no-snap /etc/apt/preferences.d/firefox-no-snap
+
+COPY /root/ /
 
 RUN \
-  echo "**** add icon ****" && \
-  curl -o \
-    /kclient/public/icon.png \
-    https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png && \
   echo "**** install packages ****" && \
-  apk add --no-cache \
-    faenza-icon-theme \
-    faenza-icon-theme-xfce4-appfinder \
-    faenza-icon-theme-xfce4-panel \
-    firefox \
-    mousepad \
-    ristretto \
-    thunar \
-    util-linux-misc \
-    xfce4 \
-    xfce4-terminal && \
-  echo "**** cleanup ****" && \
-  rm -f \
-    /etc/xdg/autostart/xfce4-power-manager.desktop \
-    /etc/xdg/autostart/xscreensaver.desktop \
-    /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop && \
-  rm -rf \
-    /config/.cache \
-    /tmp/*
+  add-apt-repository -y ppa:mozillateam/ppa && \
+  apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y firefox && \ 
+  apt-get install -y \
+    gnome-shell \
+    gnome-shell-* \
+    dbus-x11 \
+    gnome-terminal \
+    gnome-accessibility-themes \
+    gnome-calculator \
+    gnome-control-center* \
+    gnome-desktop3-data \
+    gnome-initial-setup \
+    gnome-menus \
+    gnome-text-editor \
+    gnome-themes-extra* \
+    gnome-user-docs \
+    gnome-video-effects \
+    gnome-tweaks \
+    gnome-software \
+    language-pack-en-base \
+    mesa-utils \
+    xterm \
+    yaru-* && \
 
-# add local files
-COPY /root /
+  for file in $(find /usr -type f -iname "*login1*"); do mv -v $file "$file.back"; done && \
+
+  echo "sudo chmod u+s /usr/lib/dbus-1.0/dbus-daemon-launch-helper\nexport XDG_CURRENT_DESKTOP=GNOME" >> /config/.bashrc && \
+
+  mv -v /usr/share/applications/gnome-sound-panel.desktop /usr/share/applications/gnome-sound-panel.desktop.back && \
+
+  apt-get remove -y \
+    gnome-power-manager \
+    gnome-bluetooth \
+    gnome-software \
+    gpaste \
+    hijra-applet gnome-shell-extension-hijra \
+    mailnag gnome-shell-mailnag \
+    gnome-shell-pomodoro gnome-shell-pomodoro-data
 
 # ports and volumes
 EXPOSE 3000
