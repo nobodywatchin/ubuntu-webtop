@@ -41,7 +41,7 @@ RUN \
 
   for file in $(find /usr -type f -iname "*login1*"); do mv -v $file "$file.back"; done && \
 
-  echo "sudo chmod u+s /usr/lib/dbus-1.0/dbus-daemon-launch-helper\nexport XDG_CURRENT_DESKTOP=GNOME" >> /config/.bashrc && \
+  echo "sudo chmod u+s /usr/lib/dbus-1.0/dbus-daemon-launch-helper\nexport XDG_CURRENT_DESKTOP=ubuntu:GNOME" >> /config/.bashrc && \
 
   mv -v /usr/share/applications/gnome-sound-panel.desktop /usr/share/applications/gnome-sound-panel.desktop.back && \
 
@@ -52,7 +52,10 @@ RUN \
     gpaste \
     hijra-applet gnome-shell-extension-hijra \
     mailnag gnome-shell-mailnag \
-    gnome-shell-pomodoro gnome-shell-pomodoro-data
+    gnome-shell-pomodoro gnome-shell-pomodoro-data && \
+
+    export $(dbus-launch) && \
+    dconf load / < /defaults/gnome.dconf.conf 
 
 # ports and volumes
 EXPOSE 3000
