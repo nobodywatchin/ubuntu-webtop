@@ -16,8 +16,9 @@ RUN \
   echo "**** install packages ****" && \
   add-apt-repository -y ppa:mozillateam/ppa && \
   apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y firefox && \ 
   apt-get install -y \
+    firefox \
+    fonts-ubuntu \
     gnome-shell \
     gnome-shell-* \
     dbus-x11 \
@@ -36,7 +37,6 @@ RUN \
     gnome-software \
     language-pack-en-base \
     mesa-utils \
-    xterm \
     yaru-* && \
 
   for file in $(find /usr -type f -iname "*login1*"); do mv -v $file "$file.back"; done && \
