@@ -25,7 +25,7 @@ This image provides various versions that are available via tags. Please read th
 
 | Tag | Available | Description |
 | :----: | :----: |--- |
-| latest | ✅ | GNOME (42) Ubuntu 22.04 |
+| master | ✅ | GNOME (42) Ubuntu 22.04 |
 | ubuntu-2310-gnome | ❌ | GNOME (45) Ubuntu 23.10 |
 | fedora-39-gnome | ❌ | GNOME (45) Fedora 39 |
 
@@ -98,7 +98,7 @@ To help you get started creating a container from this image you can either use 
 ---
 services:
   webtop:
-    image: lscr.io/mollomm1/webtop-plus:latest
+    image: ghcr.io/mollomm1/docker-webtop-plus:master
     container_name: webtop
     security_opt:
       - seccomp:unconfined #optional
@@ -136,7 +136,7 @@ docker run -d \
   --device /dev/dri:/dev/dri `#optional` \
   --shm-size="1gb" `#optional` \
   --restart unless-stopped \
-  lscr.io/mollomm1/webtop-plus:latest
+  ghcr.io/mollomm1/docker-webtop-plus:master
 ```
 
 ## Parameters
