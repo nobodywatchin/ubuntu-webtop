@@ -5,9 +5,9 @@
 
 ![img](https://raw.githubusercontent.com/Mollomm1/docker-webtop-plus/master/.github/demo.png)
 
-
 Original WebTop: [linuxserver/webtop](https://github.com/linuxserver/docker-webtop)
 
+Massive thanks to the [udroid](https://udroid-rc.gitbook.io/udroid-wiki) team for the gnome fixes that allow running it without systemd.
 
 ## Supported Architectures
 
