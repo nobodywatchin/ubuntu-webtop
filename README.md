@@ -30,8 +30,6 @@ This image provides various versions that are available via tags. Please read th
 | Tag | Available | Description |
 | :----: | :----: |--- |
 | master | ✅ | GNOME (42) Ubuntu 22.04 |
-| ubuntu-2310-gnome | ❌ | GNOME (45) Ubuntu 23.10 |
-| fedora-39-gnome | ❌ | GNOME (45) Fedora 39 |
 
 ## Usage
 
