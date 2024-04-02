@@ -29,7 +29,6 @@ RUN \
     gnome-desktop3-data \
     gnome-initial-setup \
     gnome-menus \
-    gnome-text-editor \
     gnome-themes-extra* \
     gnome-user-docs \
     gnome-video-effects \
@@ -37,25 +36,29 @@ RUN \
     gnome-software \
     language-pack-en-base \
     mesa-utils \
-    yaru-* && \
+    xdg-desktop-portal \
+    flatpak \
+    gnome-software \
+    gnome-software-plugin-flatpak \
+    yaru-*
 
+RUN \
+  echo "**** apply fixes ****" && \
   for file in $(find /usr -type f -iname "*login1*"); do mv -v $file "$file.back"; done && \
+  chown abc /config/.wallpaper.jpg && \
+  echo "\n# fixes and stuff for gnome and flatpaks\nexport $(dbus-launch)\nexport XDG_CURRENT_DESKTOP=ubuntu:GNOME\nexport XDG_DATA_DIRS=/var/lib/flatpak/exports/share:/config/.local/share/flatpak/exports/share:/usr/local/share:/usr/share\nexport XDG_SESSION_TYPE=x11\nexport DESKTOP_SESSION=ubuntu\nexport GNOME_SHELL_SESSION_MODE=ubuntu" >> /etc/profile && \
+  mv -v /usr/share/applications/gnome-sound-panel.desktop /usr/share/applications/gnome-sound-panel.desktop.back
 
-  echo "sudo chmod u+s /usr/lib/dbus-1.0/dbus-daemon-launch-helper\nexport XDG_CURRENT_DESKTOP=ubuntu:GNOME" >> /config/.bashrc && \
-
-  mv -v /usr/share/applications/gnome-sound-panel.desktop /usr/share/applications/gnome-sound-panel.desktop.back && \
-
+RUN \
+  echo "**** clean stuff ****" && \
   apt-get remove -y \
     gnome-power-manager \
     gnome-bluetooth \
-    gnome-software \
     gpaste \
     hijra-applet gnome-shell-extension-hijra \
     mailnag gnome-shell-mailnag \
-    gnome-shell-pomodoro gnome-shell-pomodoro-data && \
-
-    export $(dbus-launch) && \
-    dconf load / < /defaults/gnome.dconf.conf 
+    xterm \
+    gnome-shell-pomodoro gnome-shell-pomodoro-data
 
 # ports and volumes
 EXPOSE 3000

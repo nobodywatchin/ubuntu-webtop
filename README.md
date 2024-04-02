@@ -5,6 +5,10 @@
 
 ![img](https://raw.githubusercontent.com/Mollomm1/docker-webtop-plus/master/.github/demo.png)
 
+features:
+* Real Gnome Shell
+* Flatpaks (require --privileged flag)
+
 Original WebTop: [linuxserver/webtop](https://github.com/linuxserver/docker-webtop)
 
 Massive thanks to the [udroid](https://udroid-rc.gitbook.io/udroid-wiki) team for the gnome fixes that allow running it without systemd.
@@ -31,51 +35,22 @@ This image provides various versions that are available via tags. Please read th
 
 ## Usage
 
-To help you get started creating a container from this image you can either use docker-compose or the docker cli.
-
-### docker-compose (recommended, [click here for more info](https://docs.linuxserver.io/general/docker-compose))
-
-```yaml
----
-services:
-  webtop:
-    image: ghcr.io/mollomm1/docker-webtop-plus:master
-    container_name: webtop
-    security_opt:
-      - seccomp:unconfined #optional
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - SUBFOLDER=/ #optional
-    volumes:
-      - /path/to/data:/config
-      - /var/run/docker.sock:/var/run/docker.sock #optional
-    ports:
-      - 3000:3000
-      - 3001:3001
-    devices:
-      - /dev/dri:/dev/dri #optional
-    shm_size: "1gb" #optional
-    restart: unless-stopped
-```
-
 ### docker cli ([click here for more info](https://docs.docker.com/engine/reference/commandline/cli/))
 
 ```bash
 docker run -d \
   --name=webtop \
   --security-opt seccomp=unconfined `#optional` \
+  --privileged `#optional but required to run flatpaks` \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=Etc/UTC \
   -e SUBFOLDER=/ `#optional` \
   -p 3000:3000 \
   -p 3001:3001 \
-  -v /path/to/data:/config \
-  -v /var/run/docker.sock:/var/run/docker.sock `#optional` \
+  -v /path/to/data:/config
   --device /dev/dri:/dev/dri `#optional` \
-  --shm-size="1gb" `#optional` \
+  --shm-size="1gb" \
   --restart unless-stopped \
   ghcr.io/mollomm1/docker-webtop-plus:master
 ```
