@@ -40,12 +40,14 @@ RUN \
     flatpak \
     gnome-software \
     gnome-software-plugin-flatpak \
-    yaru-*
+    yaru-* \
+    ubuntu-desktop 
+  # you can remove ubuntu-desktop if you dont want the 'bloat'.
 
 RUN \
   echo "**** apply fixes ****" && \
   for file in $(find /usr -type f -iname "*login1*"); do mv -v $file "$file.back"; done && \
-  chown abc /config/.wallpaper.jpg && \
+  chown abc /defaults/wallpaper.jpg && \
   echo "\n# fixes and stuff for gnome and flatpaks\nexport $(dbus-launch)\nexport XDG_CURRENT_DESKTOP=ubuntu:GNOME\nexport XDG_DATA_DIRS=/var/lib/flatpak/exports/share:/config/.local/share/flatpak/exports/share:/usr/local/share:/usr/share\nexport XDG_SESSION_TYPE=x11\nexport DESKTOP_SESSION=ubuntu\nexport GNOME_SHELL_SESSION_MODE=ubuntu" >> /etc/profile && \
   mv -v /usr/share/applications/gnome-sound-panel.desktop /usr/share/applications/gnome-sound-panel.desktop.back
 
@@ -58,7 +60,16 @@ RUN \
     hijra-applet gnome-shell-extension-hijra \
     mailnag gnome-shell-mailnag \
     xterm \
-    gnome-shell-pomodoro gnome-shell-pomodoro-data
+    gnome-software-plugin-snap \
+    snapd \
+    gnome-shell-pomodoro gnome-shell-pomodoro-data && \
+  apt autoremove -y &&\
+  apt clean && \
+  rm -rf \
+    /config/.cache \
+    /var/lib/apt/lists/* \
+    /var/tmp/* \
+    /tmp/*
 
 # ports and volumes
 EXPOSE 3000

@@ -3,7 +3,7 @@
 # very W.I.P, may break any time PLEASE do not use this in production.
 ## WebTop Plus
 
-![img](https://raw.githubusercontent.com/Mollomm1/docker-webtop-plus/master/.github/demo.png)
+![img](https://i.imgur.com/W1jjna1.png)
 
 features:
 * Real Gnome Shell
