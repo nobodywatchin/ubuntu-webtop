@@ -24,7 +24,7 @@ This image provides various versions that are available via tags. Please read th
 
 | Tag | Available | Description | Notes |
 | :----: | :----: | :----: |--- |
-| master | ✅ | GNOME (42) Ubuntu 22.04 | Works Fine, but ome apps are not themed correctly. |
+| master | ✅ | GNOME (42) Ubuntu 22.04 | Works Fine, but some apps are not themed correctly. |
 | ubuntu-2404 | ✅ | GNOME (46) Ubuntu 24.04 | Works Fine. |
 
 ## Usage
