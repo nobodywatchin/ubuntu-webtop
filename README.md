@@ -42,7 +42,7 @@ docker run -d \
   -e SUBFOLDER=/ `#optional` \
   -p 3000:3000 \
   -p 3001:3001 \
-  -v /path/to/data:/config
+  -v /path/to/data:/config \
   --device /dev/dri:/dev/dri `#optional` \
   --shm-size="1gb" \
   --restart unless-stopped \
