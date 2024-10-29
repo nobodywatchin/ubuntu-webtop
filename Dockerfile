@@ -17,7 +17,6 @@ RUN \
   add-apt-repository -y ppa:mozillateam/ppa && \
   apt-get update && \
   apt-get install -y \
-    firefox \
     fonts-ubuntu \
     gnome-shell \
     gnome-shell-* \
@@ -43,7 +42,15 @@ RUN \
     yaru-* \
     ubuntu-desktop 
   # you can remove ubuntu-desktop if you dont want the 'bloat'.
-
+RUN \
+  curl -s https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg 
+  sudo gpg --dearmor 
+  sudo tee /usr/share/keyrings/brave-browser-archive-keyring.gpg > /dev/null \
+  echo deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main
+  sudo tee /etc/apt/sources.list.d/brave-browser-release.list \
+  sudo apt update \
+  sudo apt install brave-browser
+  
 RUN \
   echo "**** apply fixes ****" && \
   for file in $(find /usr -type f -iname "*login1*"); do mv -v $file "$file.back"; done && \
@@ -66,9 +73,11 @@ RUN \
     shotwell \
     gnome-calendar \
     gnome-todo gnome-todo-common libgnome-todo \
-    transmission-common transmission-gtk \
     cheese \
     simple-scan \
+    thunderbird \
+    rhythmbox rhythmbox-plugins rhythmbox-data rhythmbox-plugin-alternative-toolbar \
+    yelp \
     libreoffice libreoffice-base-core libreoffice-calc libreoffice-common libreoffice-core libreoffice-draw libreoffice-gnome libreoffice-gtk3 libreoffice-impress libreoffice-math libreoffice-pdfimport libreoffice-writer libreoffice-style-breeze libreoffice-style-colibre libreoffice-style-elementary libreoffice-style-yaru \
     remmina && \
   apt autoremove -y &&\
