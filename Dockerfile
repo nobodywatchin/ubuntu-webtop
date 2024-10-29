@@ -39,8 +39,8 @@ RUN \
     flatpak \
     gnome-software \
     gnome-software-plugin-flatpak \
-    yaru-* \
-    # ubuntu-desktop 
+    yaru-* 
+   # ubuntu-desktop 
   # you can remove ubuntu-desktop if you dont want the 'bloat'.
   
 RUN \
