@@ -40,13 +40,8 @@ RUN \
     gnome-software \
     gnome-software-plugin-flatpak \
     yaru-* \
-    ubuntu-desktop 
+    # ubuntu-desktop 
   # you can remove ubuntu-desktop if you dont want the 'bloat'.
-RUN \
-  curl -s https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg | gpg --dearmor | tee /usr/share/keyrings/brave-browser-archive-keyring.gpg > /dev/null \
-  echo deb [arch=amd64 signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main | tee /etc/apt/sources.list.d/brave-browser-release.list \
-  apt update \
-  apt install brave-browser
   
 RUN \
   echo "**** apply fixes ****" && \
@@ -58,6 +53,7 @@ RUN \
 RUN \
   echo "**** clean stuff ****" && \
   apt-get remove -y \
+    firefox \
     gnome-power-manager \
     gnome-bluetooth \
     gpaste \
@@ -71,6 +67,7 @@ RUN \
     gnome-calendar \
     gnome-todo gnome-todo-common libgnome-todo \
     cheese \
+    transmission \
     simple-scan \
     thunderbird \
     rhythmbox rhythmbox-plugins rhythmbox-data rhythmbox-plugin-alternative-toolbar \
