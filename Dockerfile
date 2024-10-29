@@ -63,6 +63,14 @@ RUN \
     gnome-software-plugin-snap \
     snapd \
     gnome-shell-pomodoro gnome-shell-pomodoro-data && \
+    shotwell \
+    gnome-calendar \
+    gnome-todo gnome-todo-common libgnome-todo \
+    transmission-common transmission-gtk \
+    cheese \
+    simple-scan \
+    libreoffice libreoffice-base-core libreoffice-calc libreoffice-common libreoffice-core libreoffice-draw libreoffice-gnome libreoffice-gtk3 libreoffice-impress libreoffice-math libreoffice-pdfimport libreoffice-writer libreoffice-style-breeze libreoffice-style-colibre libreoffice-style-elementary libreoffice-style-yaru \
+    remmina
   apt autoremove -y &&\
   apt clean && \
   rm -rf \
